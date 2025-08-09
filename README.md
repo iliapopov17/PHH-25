@@ -1,5 +1,7 @@
 # Exploring Patterns in Well-being Perceptions and Healthcare Evaluation in Kazakhstan 🇰🇿
 
+>In partnership with NAC Analytica
+
 **Authors**  
 - Dayana Akhmedina
 - Zhanna Berdygulova
