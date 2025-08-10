@@ -295,7 +295,7 @@ dashboards = [
         score_col="eco_score",
         question_col="q8. Оцените, пожалуйста, экологическую ситуацию в Вашем населенном пункте",
         mapping={"Плохая": 0, "Удовлетворительная": 1, "Хорошая": 2},
-        title="Kazakhstan: Ecology Score by Region (2017–2021)",
+        title="Оцените, пожалуйста, экологическую ситуацию в Вашем населенном пункте (2017–2021)",
         y_range=[0.0, 2.0],
         slug="eco",
     ),
@@ -310,7 +310,7 @@ dashboards = [
             "Хорошее": 3,
             "Прекрасное": 4,
         },
-        title="Kazakhstan: Health Score by Region (2017–2021)",
+        title="В целом как бы Вы оценили свое здоровье в настоящее время? (2017–2021)",
         y_range=[0.0, 4.0],
         slug="health",
     ),
@@ -319,7 +319,7 @@ dashboards = [
         score_col="gov_med_score",
         question_col="q9.1. Оцените, пожалуйста, качество медицинских услуг в государственных медицинских учреждениях (поликлиники, больницы) в Казахстане",
         mapping={"Плохое": 1, "Удовлетворительное": 2, "Хорошее": 3},
-        title="Kazakhstan: Government Medicine Score by Region (2017–2021)",
+        title="Оцените, пожалуйста, качество мед. услуг в государственных мед. учреждениях в Казахстане (2017–2021)",
         y_range=[1.0, 3.0],
         slug="govmed",
     ),
@@ -328,7 +328,7 @@ dashboards = [
         score_col="priv_med_score",
         question_col="q9.2. Оцените, пожалуйста, качество медицинских услуг в  частных клиниках в Казахстане",
         mapping={"Плохое": 1, "Удовлетворительное": 2, "Хорошее": 3},
-        title="Kazakhstan: Private Medicine Score by Region (2017–2021)",
+        title="Оцените, пожалуйста, качество мед. услуг в  частных клиниках в Казахстане (2017–2021)",
         y_range=[1.0, 3.0],
         slug="privmed",
     ),
@@ -372,7 +372,7 @@ page = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Interactive Maps (4 Dashboards)</title>
+<title>Gurren Lagman team: Public Health Hackathon'25 project</title>
 <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
 <style>
   body {{ margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:#fafafa; }}
