@@ -1,20 +1,26 @@
 import json
 from pathlib import Path
 
+import sys, os
+
+sys.path.insert(0, os.path.abspath("."))
+
 import geopandas as gpd
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import plotly.io as pio
 
+from scripts.generate_metatag import build_meta, inject_meta_to_head
+
 # ---------- config ----------
 DATA_DIR = Path("data")
 CSV_SURVEY = DATA_DIR / "survey_random.csv"
 CSV_LE = DATA_DIR / "LE_2017_2021.csv"
 GEOJSON_PATH = Path(
-    "geoBoundaries-KAZ-ADM1-all/geoBoundaries-KAZ-ADM1_simplified.geojson"
+    "notebooks/geoBoundaries-KAZ-ADM1-all/geoBoundaries-KAZ-ADM1_simplified.geojson"
 )
-OUT_HTML = Path("docs/index.html")
+OUT_HTML = Path("../docs/index.html")
 OUT_HTML.parent.mkdir(parents=True, exist_ok=True)
 
 # ---------- load data once ----------
@@ -384,7 +390,6 @@ page = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<title>Gurren Lagman team: Public Health Hackathon'25 project</title>
 <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
 <style>
   body {{ margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:#fafafa; }}
@@ -481,6 +486,14 @@ document.addEventListener('DOMContentLoaded', () => {{
 </body>
 </html>
 """
+
+meta = build_meta(
+    title="Gurren Lagman team: Public Health Hackathon'25 project",
+    description="Exploring patterns in well-being perceptions and healthcare evaluation in Kazakhstan through interactive geospatial analysis and visualization.",
+    url="https://iliapopov17.github.io/PHH-25/",  # <- put your real site URL here later
+    image_url="imgs/metatag.png",  # <- replace with your OG image
+)
+page = inject_meta_to_head(page, meta)
 
 OUT_HTML.write_text(page, encoding="utf-8")
 print(f"Saved: {OUT_HTML.resolve()}")
