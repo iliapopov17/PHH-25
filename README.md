@@ -7,7 +7,7 @@
 >In partnership with NAC Analytica
 
 **Authors**  
-- Dayana Akhmedina
+- Elina Maltseva
 - Zhanna Berdygulova
 - Grigory Gladkov
 - Darkhan Medeuov
