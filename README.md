@@ -4,6 +4,7 @@
 </br>
 
 # Exploring Patterns in Well-being Perceptions and Healthcare Evaluation in Kazakhstan 🇰🇿
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/iliapopov17/PHH-25/pages%2Fpages-build-deployment)
 
 >In partnership with NAC Analytica
 
