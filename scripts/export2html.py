@@ -152,7 +152,19 @@ def build_one_dashboard(
         opacity=0.75,
     )
     map_fig.update_traces(marker_line_width=0.5, marker_line_color="white")
-    map_fig.update_layout(margin=dict(r=0, t=40, l=0, b=0), title=title)
+    map_fig.update_layout(
+        margin=dict(r=0, t=40, l=0, b=0),
+        title=dict(
+            text=title,
+            font=dict(
+                size=16, family="Arial", color="black"
+            ),  # size, font family, color
+            x=0,  # horizontal position (0 = left, 0.5 = center, 1 = right)
+            xanchor="left",  # anchor for x
+            yanchor="top",  # anchor for y
+            pad=dict(t=20, b=10, l=20, r=0),
+        ),
+    )
 
     # ---------- SPARK ----------
     spark_fig = go.Figure(
