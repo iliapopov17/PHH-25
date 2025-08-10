@@ -12,9 +12,9 @@ DATA_DIR = Path("data")
 CSV_SURVEY = DATA_DIR / "survey_random.csv"
 CSV_LE = DATA_DIR / "LE_2017_2021.csv"
 GEOJSON_PATH = Path(
-    "notebooks/geoBoundaries-KAZ-ADM1-all/geoBoundaries-KAZ-ADM1_simplified.geojson"
+    "geoBoundaries-KAZ-ADM1-all/geoBoundaries-KAZ-ADM1_simplified.geojson"
 )
-OUT_HTML = Path("../docs/index.html")
+OUT_HTML = Path("docs/index.html")
 OUT_HTML.parent.mkdir(parents=True, exist_ok=True)
 
 # ---------- load data once ----------
