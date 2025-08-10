@@ -14,7 +14,7 @@ CSV_LE = DATA_DIR / "LE_2017_2021.csv"
 GEOJSON_PATH = Path(
     "geoBoundaries-KAZ-ADM1-all/geoBoundaries-KAZ-ADM1_simplified.geojson"
 )
-OUT_HTML = Path("docs/interactive_maps_all.html")
+OUT_HTML = Path("docs/index.html")
 OUT_HTML.parent.mkdir(parents=True, exist_ok=True)
 
 # ---------- load data once ----------
