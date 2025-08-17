@@ -6,6 +6,8 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import plotly.io as pio
+from shapely import wkt
+from shapely.geometry import MultiPolygon, Polygon
 
 # ---------- config ----------
 DATA_DIR = Path("data")
@@ -14,12 +16,47 @@ CSV_LE = DATA_DIR / "LE_2017_2021.csv"
 GEOJSON_PATH = Path(
     "geoBoundaries-KAZ-ADM1-all/geoBoundaries-KAZ-ADM1_simplified.geojson"
 )
-OUT_HTML = Path("docs/index.html")
+OUT_HTML = Path("docs/dashboard.html")
 OUT_HTML.parent.mkdir(parents=True, exist_ok=True)
 
 # ---------- load data once ----------
 df_base = pd.read_csv(CSV_SURVEY)
 gdf = gpd.read_file(GEOJSON_PATH)
+
+sh_name = "Shymkent"
+sh_iso = "KZ-SHY"
+sh_id = "9891525B68436750823948"
+sh_grp = "KAZ"
+sh_typ = "ADM1"
+sh_wkt = """POLYGON ((69.42977905273443 42.29850387573242, 69.440658569336 42.256446838378906,
+69.5219955444336 42.27233505249035, 69.53115844726562 42.296615600585994, 69.57532501220714 42.28984832763672,
+69.60591888427734 42.26734542846691, 69.64803314208996 42.285514831543026, 69.72393798828136 42.264495849609375,
+69.71796417236334 42.33912658691412, 69.67385864257812 42.345897674560604, 69.67630004882812 42.362247467041016,
+69.7154312133789 42.35989379882818, 69.66631317138683 42.408203125000114, 69.71104431152344 42.405490875244084,
+69.69738006591803 42.42692184448242, 69.64393615722662 42.44665908813488, 69.61659240722656 42.41533660888672,
+69.62030792236334 42.43984985351568, 69.58672332763678 42.44188690185547, 69.57182312011719 42.41804504394531,
+69.52764129638683 42.42483901977545, 69.50846862792969 42.37234115600586, 69.46366119384766 42.37501907348633,
+69.42977905273443 42.29850387573242))"""
+
+geom = wkt.loads(sh_wkt)
+if gdf.geom_type.unique().tolist() == ["MultiPolygon"] and isinstance(geom, Polygon):
+    geom = MultiPolygon([geom])
+
+row = {col: None for col in gdf.columns}
+for k, v in {
+    "shapeName": sh_name,
+    "shapeISO": sh_iso,
+    "shapeGroup": sh_grp,
+    "shapeType": sh_typ,
+    "shapeID": sh_id,
+    "geometry": geom,
+}.items():
+    if k in row:
+        row[k] = v
+
+new_gdf = gpd.GeoDataFrame([row], crs=gdf.crs)
+
+gdf = pd.concat([gdf, new_gdf], ignore_index=True)
 
 name_map = {
     "г.Нур-Султан": "Astana",
@@ -28,7 +65,7 @@ name_map = {
     "Алматинская": "Almaty Region",
     "Жамбылская": "Jambyl Region",
     "Западно-Казахстанская": "West Kazakhstan Region",
-    "Туркестанская": "Turkistan Region",
+    "Туркестанская": "South Kazakhstan Region",
     "Южно-Казахстанская": "South Kazakhstan Region",
     "Северо-Казахстанская": "North Kazakhstan Region",
     "Костанайская": "Kostanay Region",
@@ -227,7 +264,7 @@ def build_one_dashboard(
             ),
         ],
         layout=go.Layout(
-            title="Кликни на регион",
+            title="Click on the region",
             margin=dict(l=30, r=10, t=40, b=30),
             xaxis=dict(
                 title="",
@@ -307,7 +344,7 @@ dashboards = [
         score_col="eco_score",
         question_col="q8. Оцените, пожалуйста, экологическую ситуацию в Вашем населенном пункте",
         mapping={"Плохая": 0, "Удовлетворительная": 1, "Хорошая": 2},
-        title="Оцените, пожалуйста, экологическую ситуацию в Вашем населенном пункте (2017–2021)",
+        title="Rate the environmental situation in your locality (2017–2021)",
         y_range=[0.0, 2.0],
         slug="eco",
     ),
@@ -322,7 +359,7 @@ dashboards = [
             "Хорошее": 3,
             "Прекрасное": 4,
         },
-        title="В целом как бы Вы оценили свое здоровье в настоящее время? (2017–2021)",
+        title="In general, how would you rate your health at present? (2017–2021)",
         y_range=[0.0, 4.0],
         slug="health",
     ),
@@ -331,7 +368,7 @@ dashboards = [
         score_col="gov_med_score",
         question_col="q9.1. Оцените, пожалуйста, качество медицинских услуг в государственных медицинских учреждениях (поликлиники, больницы) в Казахстане",
         mapping={"Плохое": 1, "Удовлетворительное": 2, "Хорошее": 3},
-        title="Оцените, пожалуйста, качество мед. услуг в государственных мед. учреждениях в Казахстане (2017–2021)",
+        title="Please rate the quality of medical services in state clinics (2017–2021)",
         y_range=[1.0, 3.0],
         slug="govmed",
     ),
@@ -340,7 +377,7 @@ dashboards = [
         score_col="priv_med_score",
         question_col="q9.2. Оцените, пожалуйста, качество медицинских услуг в  частных клиниках в Казахстане",
         mapping={"Плохое": 1, "Удовлетворительное": 2, "Хорошее": 3},
-        title="Оцените, пожалуйста, качество мед. услуг в  частных клиниках в Казахстане (2017–2021)",
+        title="Please rate the quality of medical services in private clinics (2017–2021)",
         y_range=[1.0, 3.0],
         slug="privmed",
     ),
@@ -403,7 +440,6 @@ page = f"""<!DOCTYPE html>
 </head>
 <body>
 
-<div class="title">Kazakhstan: Four Interactive Dashboards (2017–2021)</div>
 <div class="grid">
 {dash_html}
 </div>
@@ -478,6 +514,7 @@ document.addEventListener('DOMContentLoaded', () => {{
   }}
 }});
 </script>
+<script type="module" src="assets/header-footer.js"></script>
 </body>
 </html>
 """
