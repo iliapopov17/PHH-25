@@ -1,0 +1,57 @@
+<!-- Footer Partial -->
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="foot-msg">
+      Made with ❤️ and published on GitHub Pages
+      <span class="sep">•</span>
+      <span>© <span id="year"></span> Gurren Lagman Team</span>
+    </p>
+
+    <div class="logo-row">
+      <a class="logo" href="https://bioinf.institute" target="_blank" rel="noopener noreferrer" aria-label="Logo 1">
+        <img src="assets/logos/logo1.png" alt="Logo 1" loading="lazy">
+      </a>
+      <a class="logo" href="https://sociologylab.kz" target="_blank" rel="noopener noreferrer" aria-label="Logo 2">
+        <img src="assets/logos/logo2.png" alt="Logo 2" loading="lazy">
+      </a>
+      <a class="logo" href="https://nacanalytica.kz" target="_blank" rel="noopener noreferrer" aria-label="Logo 3">
+        <img src="assets/logos/logo3.png" alt="Logo 3" loading="lazy">
+      </a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* ====== Footer styles (scoped) ====== */
+  .site-footer {
+    margin-top: 48px; padding: 22px 20px;
+    border-top: 1px solid color-mix(in srgb, #000 12%, transparent);
+    background: color-mix(in srgb, var(--ftr-bg, #fff) 80%, transparent);
+  }
+  .site-footer .wrap { max-width: 1350px; margin: 0 auto; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: space-between; }
+  .foot-msg { margin: 0; color: var(--ftr-fg, #333); font-size: .95rem; }
+  .foot-msg .sep { opacity: .6; margin: 0 10px; }
+  .logo-row { display: flex; gap: 16px; align-items: center; }
+  .logo img {
+    display: block;
+    height: 28px;
+    width: auto;
+
+    /* Start in grayscale */
+    filter: grayscale(100%) brightness(0.7);
+    opacity: 0.7;
+
+    transition: filter 0.25s ease, opacity 0.25s ease, transform 0.2s ease;
+    }
+
+    .logo:hover img {
+    filter: none;       /* back to full color */
+    opacity: 1;
+    transform: translateY(-1px);
+    }
+</style>
+
+<script>
+  // Dynamic year
+  document.currentScript.closest('footer').querySelector('#year').textContent = new Date().getFullYear();
+</script>

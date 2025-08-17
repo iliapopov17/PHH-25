@@ -1,0 +1,63 @@
+<!-- Header Partial -->
+<header class="site-header">
+  <div class="wrap">
+    <a class="site-title" href="./">Exploring Patterns in Well-being Perceptions and Healthcare Evaluation in Kazakhstan</a>
+
+    <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+
+    <nav class="site-nav" aria-label="Main">
+      <a href="./" data-nav>About</a>
+      <a href="./dashboard.html" data-nav>Dashboard</a>
+      <a href="./key.html" data-nav>Key Findings</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  /* ====== Header styles (scoped) ====== */
+  .site-header {
+    position: sticky; top: 0; z-index: 1000;
+    backdrop-filter: saturate(1.2) blur(6px);
+    background: color-mix(in srgb, var(--hdr-bg, #ffffff) 88%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, #000 12%, transparent);
+  }
+  .site-header .wrap {
+    max-width: 1350px; margin: 0 auto; display: flex; align-items: center;
+    gap: 16px; padding: 12px 20px;
+  }
+  .site-title {
+    font-weight: 700; text-decoration: none; font-size: 1.1rem; letter-spacing: .2px;
+    color: var(--hdr-fg, #111);
+  }
+  .site-nav { margin-left: auto; display: flex; gap: 18px; align-items: center; }
+  .site-nav a {
+    text-decoration: none; color: var(--hdr-link, #333);
+    padding: 6px 8px; border-radius: 10px; transition: background .2s ease, color .2s ease;
+  }
+  .site-nav a:hover { background: color-mix(in srgb, #000 8%, transparent); }
+  .site-nav a.is-active {
+    color: var(--accent, #0b63f6);
+    background: color-mix(in srgb, var(--accent, #0b63f6) 10%, transparent);
+  }
+
+  /* Mobile */
+  .nav-toggle { display: none; margin-left: auto; background: none; border: 0; cursor: pointer; padding: 8px; }
+  .nav-toggle .bar { display: block; width: 22px; height: 2px; background: var(--hdr-fg, #111); margin: 5px 0; transition: transform .2s ease, opacity .2s ease; border-radius: 2px; }
+  @media (max-width: 760px) {
+    .nav-toggle { display: block; }
+    .site-nav { display: none; position: absolute; right: 20px; top: 58px; flex-direction: column;
+      background: color-mix(in srgb, var(--hdr-bg, #fff) 96%, transparent);
+      border: 1px solid color-mix(in srgb, #000 12%, transparent);
+      padding: 10px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+    .site-nav.open { display: flex; }
+  }
+
+  /* Dark mode */
+  @media (prefers-color-scheme: dark) {
+    .site-header { --hdr-bg:#0b0b0c; --hdr-fg:#f5f5f7; --hdr-link:#ddd; border-bottom-color: color-mix(in srgb, #fff 10%, transparent); }
+    .site-nav a:hover { background: color-mix(in srgb, #fff 12%, transparent); }
+  }
+</style>
