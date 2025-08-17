@@ -51,15 +51,29 @@ function setupHeaderBehavior(root) {
     }
   });
 
-  // Active link highlight
-  const here = location.pathname.replace(/\/+$/, '') || '/';
+  // Active link highlight (robust for GitHub Pages: user & project pages)
+  const normalize = (url) =>
+    new URL(url, location.href)
+      .pathname
+      .replace(/\/index\.html$/i, '')  // /repo/index.html -> /repo
+      .replace(/\/+$/, '');            // /repo/ -> /repo
+
+  const herePath = normalize(location.href);
+
+  // Clear any previous state
+  hdr.querySelectorAll('[data-nav].is-active').forEach(el => el.classList.remove('is-active'));
+
+  // Mark only exact match as active
   hdr.querySelectorAll('[data-nav]').forEach(a => {
-    const href = new URL(a.getAttribute('href'), location.href);
-    const path = href.pathname.replace(/\/+$/, '') || '/';
-    if (path === here) a.classList.add('is-active');
-    else if (here.startsWith(path) && path !== '/') a.classList.add('is-active');
+    const targetPath = normalize(a.getAttribute('href'));
+    if (targetPath === herePath) {
+      a.classList.add('is-active');
+      a.setAttribute('aria-current', 'page');
+    } else {
+      a.removeAttribute('aria-current');
+    }
   });
-}
+} // ←←← this brace was missing
 
 (async () => {
   try {
@@ -70,7 +84,7 @@ function setupHeaderBehavior(root) {
       header.setAttribute('data-injected', 'header');
       header.innerHTML = headerHTML;
       document.body.prepend(header);
-      setupHeaderBehavior(header); // <-- ВАЖНО: повесить поведение после вставки
+      setupHeaderBehavior(header); // wire behavior after insertion
     }
 
     if (!document.querySelector('[data-injected="footer"]')) {
