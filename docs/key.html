@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="assets/css/findings.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <meta charset="utf-8" />
+  <title>Findings — Gurren Lagman Team</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+  <main class="container">
+
+    <!-- Card 1: centered image, independent size via --img1 -->
+    <section class="card centered" style="--img1: 700px;">
+      <div class="title">Sentiment over time — Kazakhstan Health News</div>
+
+      <figure>
+        <img
+          class="media"
+          src="assets/imgs/sentiment.png"
+          alt="Time-series sentiment for Kazakhstani health news with a dip in 2020 and a rise just before it."
+          loading="lazy"
+        />
+        <figcaption class="caption">
+          Here, you can see the <mark>sentiment analysis</mark> results for a collection of Kazakhstani news articles related to general health.
+          In the middle of the plot, there’s a clear change in the pattern. The <mark>dip in 2020</mark> marks the onset of COVID,
+          while the <mark>rise just before</mark> that is linked to promotional coverage of the healthcare reform.
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- Card 2: centered image, independent size via --img1 -->
+    <section class="card centered" style="--img1: 700px;">
+      <div class="title">Did COVID make people feel healthier?</div>
+
+      <figure>
+        <img
+          class="media"
+          src="assets/imgs/c19.png"
+          alt="Visualization related to health perception during COVID and healthcare reform timing in Kazakhstan."
+          loading="lazy"
+        />
+        <figcaption class="caption">
+          One particularly interesting finding is that during the COVID period, people actually reported
+          <mark>better</mark> health perceptions than in other times. COVID happened to coincide with a major healthcare
+          reform in Kazakhstan, launched in mid-2019 — about six months earlier.
+          <br><br>
+          To separate the effects of COVID from the reform, we used a <mark>difference-in-differences</mark> approach.
+          This method tests whether an external event changes a trend we would otherwise expect in the data.
+          Our results show that it wasn’t COVID itself, but <mark>most likely the reform</mark>, that shifted how people perceived their health.
+          Still, during the peak of the pandemic, the <em>QuantCovid</em> coefficient showed a surprising uptick in the long-term trend.
+          Why? We can only speculate. One explanation: <i>«I didn’t die today — that’s already a success»</i>.
+          Another: reporting better health may have been a coping mechanism — people reassuring themselves that they were healthy.
+        </figcaption>
+      </figure>
+    </section>
+
+    <!-- Card 3: image left, text right, centered as a whole; independent size via --img2 -->
+    <section class="card side-by-side" style="--img2: 200px;">
+      <div class="title">Private healthcare attitudes — not the same for everyone</div>
+
+      <div class="image-col">
+        <img
+          src="assets/imgs/did.png"
+          alt="Visualization about attitudes toward private healthcare by region life expectancy."
+          loading="lazy"
+        />
+      </div>
+
+      <div class="text-col">
+        <div class="caption">
+          Another interesting finding comes from a different dependent variable — <mark>attitudes toward private healthcare</mark>.
+          In regions with <mark>below-average life expectancy</mark>, these attitudes actually worsened after the reform.
+          It seems that people who expect to live shorter lives than the average Kazakhstani feel that private medicine
+          won’t make much difference for them.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Optional: include global header/footer injector -->
+  <script type="module" src="assets/js/header-footer.js"></script>
+</body>
+</html>
