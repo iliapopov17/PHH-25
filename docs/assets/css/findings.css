@@ -1,0 +1,21 @@
+/* ========== findings.css ==========
+   Sentiment/key findings cards + side-by-side layout helpers
+*/
+figure { margin:0; }
+.media {
+  display:block; width:100%; height:auto; border-radius:10px;
+}
+/* Centered card with max image width */
+.card.centered { --img1: 675px; }
+.card.centered .media { max-width: var(--img1); margin: 0 auto; }
+/* Side-by-side (image left, text right) */
+.card.side-by-side { --img2: 340px; display:flex; flex-wrap:wrap; align-items:center; gap:16px; }
+.card.side-by-side .title { flex-basis:100%; padding-bottom:6px; }
+.image-col { width: var(--img2); flex: 0 0 var(--img2); max-width:100%; box-sizing:border-box; }
+.image-col img { display:block; width:100%; height:auto; border-radius:10px; }
+.text-col { flex:1; min-width:260px; }
+.caption { margin-top:10px; color:#555; font-size:.95rem; line-height:1.55; }
+@media (max-width:700px){
+  .card.side-by-side { flex-direction:column; align-items:stretch; }
+  .image-col, .text-col { flex: 1 1 auto; width:100%; }
+}

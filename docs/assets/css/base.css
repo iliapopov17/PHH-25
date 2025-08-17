@@ -1,0 +1,57 @@
+/* ========== base.css ==========
+   Global layout, typography, containers, cards, sticky footer
+   Import this on ALL pages.
+*/
+:root{
+  --bg:#fafafa;
+  --fg:#222;
+  --muted:#555;
+  --link:#0b63f6;
+  --card-bg:#fff;
+  --shadow:0 1px 4px rgba(0,0,0,.08);
+  --radius:12px;
+  --wrap:1100px;
+}
+
+/* Sticky footer layout */
+html, body { height: 100%; }
+body {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+main { flex: 1 0 auto; }
+.site-footer { flex-shrink: 0; }
+
+/* Common containers */
+.container { padding: 12px; max-width: var(--wrap); margin: 0 auto; }
+
+/* Card */
+.card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.title {
+  font-weight: 600;
+  color: #333;
+  font-size: 1.05rem;
+  margin: 0 0 8px;
+}
+
+.caption mark{
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: inherit; padding: 0 4px; border-radius: 4px;
+}
+
+/* Typography */
+p { line-height: 1.55; margin: 0 0 10px; }
+.muted { color: var(--muted); }
+a.link { color: var(--link); text-decoration: none; font-weight: 600; }
+a.link:hover, a.link:focus { text-decoration: underline; }

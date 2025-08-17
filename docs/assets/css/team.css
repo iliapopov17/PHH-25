@@ -1,0 +1,53 @@
+/* ========== team.css ==========
+   Team list + spotlight photo
+   Import where the team block appears.
+*/
+body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; background:#fafafa; color:#222; }
+.container { padding:12px; max-width:1100px; margin:0 auto; }
+
+.card {
+  background:#fff; border-radius:12px; box-shadow:0 1px 4px rgba(0,0,0,0.08);
+  padding:16px; margin-bottom:16px;
+}
+.title { font-weight:600; color:#333; font-size:1.05rem; margin:0 0 8px; }
+p { line-height:1.55; margin:0 0 10px; }
+.muted { color:#555; }
+a.link { color:#0b63f6; text-decoration:none; font-weight:600; }
+a.link:hover { text-decoration:underline; }
+
+/* 2-column layout */
+.about {
+  display:grid; grid-template-columns: 1fr 1fr; gap:20px; align-items:start;
+}
+@media (max-width: 900px) {
+  .about { grid-template-columns: 1fr; }
+}
+
+/* Team block */
+.team { display:flex; flex-direction:column; gap:16px; align-items:flex-start; }
+.members { list-style:none; padding:0; margin:0; }
+.members li { margin:8px 0; cursor:pointer; font-weight:500; }
+.members li small { color:#666; font-weight:400; }
+.members li:hover, .members li:focus { color:#0b63f6; outline:none; }
+
+.photo {
+  position:relative; width:85%; max-width:100%; border-radius:12px; overflow:hidden;
+  box-shadow:0 1px 4px rgba(0,0,0,.08); background:#fff;
+  --x: 50%; --y: 50%; --r: 250px; /* defaults */
+}
+.photo img { display:block; width:100%; height:auto; max-width:100%; }
+
+.photo::after{
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:0; transition:opacity .18s ease;
+  background:
+radial-gradient(circle at var(--x) var(--y),
+  transparent 0,
+  transparent var(--r),
+  rgba(0,0,0,.65) calc(var(--r) + 1px),
+  rgba(0,0,0,.65) 100%);
+}
+.photo.on::after { opacity:1; }
+
+/* Badges */
+.badge-row { display:flex; flex-wrap:wrap; gap:8px; margin:8px 0 0; }
+.badge { border:1px solid #e7e7e7; border-radius:999px; padding:4px 8px; background:#fff; color:#666; font-size:.85rem; }
