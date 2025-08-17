@@ -16,6 +16,23 @@
 </header>
 
 <style>
+
+  /* базовая раскладка для всех страниц */
+  html, body { height: 100%; }
+  body {
+    min-height: 100dvh;          /* динамическая высота окна (лучше, чем 100vh на мобильных) */
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;              /* основной контент занимает всё доступное пространство */
+  }
+
+  .site-footer {
+    flex-shrink: 0;              /* футер НЕ сжимается и не растягивается */
+  }
+
   /* ====== Header styles (scoped) ====== */
   .site-header {
     position: sticky; top: 0; z-index: 1000;
